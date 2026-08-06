@@ -1,10 +1,6 @@
 # Mindustry 逻辑编辑器 (mLogEditor)
 
-基于 Blockly 的可视化编程工具，专为 [Mindustry](https://mindustrygame.github.io/) 游戏逻辑设计。通过拖拽积木块，快速生成 `mlog` 汇编代码。
-
-[![Blockly](https://img.shields.io/badge/Blockly-可视化编程-brightgreen)](https://developers.google.com/blockly)
-[![Mindustry](https://img.shields.io/badge/Mindustry-7.0-blue)](https://mindustrygame.github.io/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-yellow)](LICENSE)
+基于 Blockly 的Mindustry Logic可视化编程工具。通过拖拽积木块，快速生成 `mlog` 汇编代码。
 
 ---
 
@@ -12,9 +8,8 @@
 
 - 拖拽式逻辑编程，基于 Blockly
 - 实时代码生成：积木 → mlog 汇编
-- 自动保存至浏览器本地存储
-- 工作区导入/导出（JSON 格式）
-- 暗色主题，适合长时间开发
+- 自动保存至浏览器本地
+- 工作区导入/导出
 - 简体中文界面
 - Zelos 渲染器
 
@@ -24,8 +19,8 @@
 
 | 组件 | 说明 |
 |------|------|
-| [Blockly](https://developers.google.com/blockly) | 可视化编程框架 |
-| [mlogjs](https://github.com/MLG-Reborn/mlogjs) | JavaScript → mlog 编译器 |
+| [Blockly](https://github.com/RaspberryPiFoundation/blockly) | 可视化编程框架 |
+| [mlogjs](https://github.com/mlogjs/mlogjs) | JavaScript → mlog 编译器 |
 | Webpack | 模块打包 |
 | Node.js | 构建与开发环境 |
 
@@ -34,7 +29,7 @@
 ## 构建与开发
 
 ### 环境要求
-- Node.js ≥ 16.0
+- Node.js >= 16.0
 
 ### 安装依赖
 ```bash
@@ -120,9 +115,10 @@ mLogEditor/
 
 ## 致谢
 
-- [Blockly 团队](https://developers.google.com/blockly) 提供的可视化编程框架
-- [mlogjs](https://github.com/MLG-Reborn/mlogjs) 的 JavaScript 到 mlog 编译器
-- [Mindustry](https://mindustrygame.github.io/) 游戏本身
+- [Blockly 团队](https://github.com/RaspberryPiFoundation/blockly) 提供可视化编程框架
+- [mlogjs](https://github.com/mlogjs/mlogjs) 的 JavaScript 到 mlog 编译器
+- [Mindustry](https://github.com/anuken/mindustry) 游戏本身
+- 本项目使用 Deepseek V4 辅助开发
 
 ---
 
