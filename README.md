@@ -1,50 +1,129 @@
-# Blockly Sample App
+# Mindustry 逻辑编辑器 (mLogEditor)
 
-## Purpose
+基于 Blockly 的可视化编程工具，专为 [Mindustry](https://mindustrygame.github.io/) 游戏逻辑设计。通过拖拽积木块，快速生成 `mlog` 汇编代码。
 
-This app illustrates how to use Blockly together with common programming tools like node/npm, webpack, typescript, eslint, and others. You can use it as the starting point for your own application and modify it as much as you'd like. It contains basic infrastructure for running, building, testing, etc. that you can use even if you don't understand how to configure the related tool yet. When your needs outgrow the functionality provided here, you can replace the provided configuration or tool with your own.
+[![Blockly](https://img.shields.io/badge/Blockly-可视化编程-brightgreen)](https://developers.google.com/blockly)
+[![Mindustry](https://img.shields.io/badge/Mindustry-7.0-blue)](https://mindustrygame.github.io/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellow)](LICENSE)
 
-## Quick Start
+---
 
-1. [Install](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) npm if you haven't before.
-2. Run [`npx @blockly/create-package app <application-name>`](https://www.npmjs.com/package/@blockly/create-package) to clone this application to your own machine.
-3. Run `npm install` to install the required dependencies.
-4. Run `npm run start` to run the development server and see the app in action.
-5. If you make any changes to the source code, just refresh the browser while the server is running to see them.
+## 特性
 
-## Tooling
+- 拖拽式逻辑编程，基于 Blockly
+- 实时代码生成：积木 → mlog 汇编
+- 自动保存至浏览器本地存储
+- 工作区导入/导出（JSON 格式）
+- 暗色主题，适合长时间开发
+- 简体中文界面
+- Zelos 渲染器
 
-The application uses many of the same tools that the Blockly team uses to develop Blockly itself. Following is a brief overview, and you can read more about them on our [developer site](https://developers.google.com/blockly/guides/contribute/get-started/development_tools).
+---
 
-- Structure: The application is built as an npm package. You can use npm to manage the dependencies of the application.
-- Modules: ES6 modules to handle imports to/exports from other files.
-- Building/bundling: Webpack to build the source code and bundle it into one file for serving.
-- Development server: webpack-dev-server to run locally while in development.
-- Testing: Mocha to run unit tests.
-- Linting: Eslint to lint the code and ensure it conforms with a standard style.
-- UI Framework: Does not use a framework. For more complex applications, you may wish to integrate a UI framework like React or Angular.
+## 技术栈
 
-You can disable, reconfigure, or replace any of these tools at any time, but they are preconfigured to get you started developing your Blockly application quickly.
+| 组件 | 说明 |
+|------|------|
+| [Blockly](https://developers.google.com/blockly) | 可视化编程框架 |
+| [mlogjs](https://github.com/MLG-Reborn/mlogjs) | JavaScript → mlog 编译器 |
+| Webpack | 模块打包 |
+| Node.js | 构建与开发环境 |
 
-## Structure
+---
 
-- `package.json` contains basic information about the app. This is where the scripts to run, build, etc. are listed.
-- `package-lock.json` is used by npm to manage dependencies
-- `webpack.config.js` is the configuration for webpack. This handles bundling the application and running our development server.
-- `src/` contains the rest of the source code.
-- `dist/` contains the packaged output (that you could host on a server, for example). This is ignored by git and will only appear after you run `npm run build` or `npm run start`.
+## 构建与开发
 
-### Source Code
+### 环境要求
+- Node.js ≥ 16.0
 
-- `index.html` contains the skeleton HTML for the page. This file is modified during the build to import the bundled source code output by webpack.
-- `index.js` is the entry point of the app. It configures Blockly and sets up the page to show the blocks, the generated code, and the output of running the code in JavaScript.
-- `serialization.js` has code to save and load the workspace using the browser's local storage. This is how your workspace is saved even after refreshing or leaving the page. You could replace this with code that saves the user's data to a cloud database instead.
-- `toolbox.js` contains the toolbox definition for the app. The current toolbox contains nearly every block that Blockly provides out of the box. You probably want to replace this definition with your own toolbox that uses your custom blocks and only includes the default blocks that are relevant to your application.
-- `blocks/text.js` has code for a custom text block, just as an example of creating your own blocks. You probably want to delete this block, and add your own blocks in this directory.
-- `generators/javascript.js` contains the JavaScript generator for the custom text block. You'll need to include block generators for any custom blocks you create, in whatever programming language(s) your application will use.
+### 安装依赖
+```bash
+npm install
+```
 
-## Serving
+### 开发模式
+```bash
+npm start
+```
+启动 Webpack Dev Server，默认端口 8080，支持热模块替换（HMR）。
 
-To run your app locally, run `npm run start` to run the development server. This mode generates source maps and ingests the source maps created by Blockly, so that you can debug using unminified code.
+### 生产构建
+```bash
+npm run build
+```
+输出目录：`dist/`
 
-To deploy your app so that others can use it, run `npm run build` to run a production build. This will bundle your code and minify it to reduce its size. You can then host the contents of the `dist` directory on a web server of your choosing. If you're just getting started, try using [GitHub Pages](https://pages.github.com/).
+### 部署
+项目包含 GitHub Actions 工作流（`.github/workflows/deploy.yml`），推送至 `main` 分支时自动构建并部署到 `gh-pages` 分支。
+
+手动部署：
+```bash
+npx gh-pages -d dist
+```
+
+---
+
+## 项目结构
+
+```
+mLogEditor/
+├── .github/workflows/       # CI/CD 自动部署配置
+├── public/media/            # Blockly 静态资源（图标、音效）
+├── src/
+│   ├── blocks/              # 自定义积木定义（JSON）
+│   ├── generators/          # mlog 代码生成器
+│   ├── styles/              # CSS
+│   ├── index.html           # 页面模板
+│   └── index.js             # 应用入口
+├── webpack.config.js        # 构建配置
+└── package.json
+```
+
+---
+
+## 使用指南
+
+### 添加积木
+从左侧工具箱拖拽积木到工作区，按照逻辑顺序拼接。
+
+### 生成代码
+工作区每次变更会自动在右侧面板生成对应的 mlog 代码。
+
+### 复制代码
+点击代码面板右上角的“复制”按钮，可将代码复制到剪贴板。
+
+### 导出与导入
+- 导出：将当前工作区保存为 JSON 文件（头部工具栏中的“导出”按钮）。
+- 导入：从 JSON 文件恢复工作区（“导入”按钮）。
+- 新建：清空工作区（会弹出确认对话框）。
+
+### 自动恢复
+页面刷新或重新打开时，自动从浏览器本地存储加载上次保存的工作区。
+
+---
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！请确保：
+- 代码符合 ESLint 规则（项目已集成）。
+- 提交前测试功能正常运行。
+- 如果是新功能，请同时更新相关文档。
+
+---
+
+## 许可证
+
+本项目采用 [Apache License 2.0](LICENSE) 开源协议。  
+您可以在遵守许可证条款的前提下自由使用、修改和分发本项目。
+
+---
+
+## 致谢
+
+- [Blockly 团队](https://developers.google.com/blockly) 提供的可视化编程框架
+- [mlogjs](https://github.com/MLG-Reborn/mlogjs) 的 JavaScript 到 mlog 编译器
+- [Mindustry](https://mindustrygame.github.io/) 游戏本身
+
+---
+
+**Happy Logic Crafting!**
