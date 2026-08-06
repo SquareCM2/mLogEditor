@@ -8,8 +8,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-	permissions:
-	    contents: write
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,18 +23,18 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci  # 使用 npm ci 更快且可靠（适用于 lockfile）
+        run: npm ci
 
       - name: Build project
-        run: npm run build  # 生产构建，输出到 dist/
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist   # 构建输出目录
-          publish_branch: gh-pages  # 部署到 gh-pages 分支
-          force_orphan: true   # 可选：清空历史，只保留最新版本
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy to GitHub Pages'
