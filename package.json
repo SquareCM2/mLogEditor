@@ -1,0 +1,41 @@
+{
+  "name": "mLogEditor",
+  "version": "13.2.0",
+  "description": "A sample app using Blockly",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack serve --open --mode development"
+  },
+  "keywords": [
+    "blockly"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "blockly-field-color-wheel": "^1.0.5",
+    "copy-webpack-plugin": "^14.0.0",
+    "css-loader": "^7.1.4",
+    "html-webpack-plugin": "^5.6.7",
+    "mlogjs": "^0.5.2",
+    "process": "^0.11.10",
+    "source-map-loader": "^5.0.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.0.3",
+    "webpack-dev-server": "^6.0.0"
+  },
+  "dependencies": {
+    "@blockly/block-shareable-procedures": "^13.2.0",
+    "@blockly/theme-dark": "^13.2.0",
+    "@blockly/theme-modern": "^13.2.0",
+    "blockly": "^13.2.0",
+    "crypto-browserify": "^3.12.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5"
+  }
+}
