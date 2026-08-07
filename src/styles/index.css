@@ -235,6 +235,7 @@ body {
     position: relative;
     min-width: 0;
 }
+
 .blockly-wrapper::before {
     content: '';
     position: absolute;
@@ -275,6 +276,17 @@ body {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.2), transparent);
     z-index: 5;
+}
+
+@media (min-width: 1920px) {
+	.blockly-wrapper {
+	    flex: 1;               /* 占据剩余所有空间 */
+	    min-width: 0;          /* 防止溢出 */
+	}
+	.code-panels-vertical {
+	    flex: 0 0 420px;       /* 固定宽度（可根据需要调整） */
+	    max-width: 420px;      /* 限制最大宽度 */
+	}
 }
 
 .code-header {
