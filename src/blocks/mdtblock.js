@@ -113,6 +113,110 @@ Blockly.Extensions.registerMutator(
   ['print_item']  // 变形器工作区允许的块类型
 );
 
+// 辅助函数：生成包含图标和文字的 HTML 元素
+function createUnitOption(text, iconSrc) {
+  const div = document.createElement('div');
+  div.innerHTML = `<img src="${iconSrc}" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;"> ${text}`;
+  return div;
+}
+
+// 选项数据（直接从 JSON 复制）
+const unitOptionsData = [
+  ["尖刀", "res/units-ui/dagger.png", "dagger"],
+  ["战锤", "res/units-ui/mace.png", "mace"],
+  ["堡垒", "res/units-ui/fortress.png", "fortress"],
+  ["权杖", "res/units-ui/scepter.png", "scepter"],
+  ["王座", "res/units-ui/reign.png", "reign"],
+  ["新星", "res/units-ui/nova.png", "nova"],
+  ["恒星", "res/units-ui/pulsar.png", "pulsar"],
+  ["耀星", "res/units-ui/quasar.png", "quasar"],
+  ["灾星", "res/units-ui/vela.png", "vela"],
+  ["死星", "res/units-ui/corvus.png", "corvus"],
+  ["爬虫", "res/units-ui/crawler.png", "crawler"],
+  ["毒蛛", "res/units-ui/atrax.png", "atrax"],
+  ["血蛭", "res/units-ui/spiroct.png", "spiroct"],
+  ["毒蛊", "res/units-ui/arkyid.png", "arkyid"],
+  ["天蝎", "res/units-ui/toxopid.png", "toxopid"],
+  ["星辉", "res/units-ui/flare.png", "flare"],
+  ["天垠", "res/units-ui/horizon.png", "horizon"],
+  ["苍穹", "res/units-ui/zenith.png", "zenith"],
+  ["月影", "res/units-ui/antumbra.png", "antumbra"],
+  ["日蚀", "res/units-ui/eclipse.png", "eclipse"],
+  ["独影", "res/units-ui/mono.png", "mono"],
+  ["幻型", "res/units-ui/poly.png", "poly"],
+  ["巨像", "res/units-ui/mega.png", "mega"],
+  ["雷霆", "res/units-ui/quad.png", "quad"],
+  ["要塞", "res/units-ui/oct.png", "oct"],
+  ["梭鱼", "res/units-ui/risso.png", "risso"],
+  ["飞鲨", "res/units-ui/minke.png", "minke"],
+  ["戟鲸", "res/units-ui/bryde.png", "bryde"],
+  ["蛟龙", "res/units-ui/sei.png", "sei"],
+  ["海神", "res/units-ui/omura.png", "omura"],
+  ["潜螺", "res/units-ui/retusa.png", "retusa"],
+  ["电鳗", "res/units-ui/oxynoe.png", "oxynoe"],
+  ["江豚", "res/units-ui/cyerce.png", "cyerce"],
+  ["玄武", "res/units-ui/aegires.png", "aegires"],
+  ["龙王", "res/units-ui/navanax.png", "navanax"],
+  ["阿尔法", "res/units-ui/alpha.png", "alpha"],
+  ["贝塔", "res/units-ui/beta.png", "beta"],
+  ["伽马", "res/units-ui/gamma.png", "gamma"]
+];
+
+Blockly.Blocks['S_Unit'] = {
+  init: function() {
+    // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
+    const options = unitOptionsData.map(([text, iconSrc, value]) => [
+      createUnitOption(text, iconSrc),
+      value
+    ]);
+
+    this.appendDummyInput()
+        .appendField('塞普罗 ')
+        .appendField(new Blockly.FieldDropdown(options), 'value');
+
+    // 设置颜色和输出类型（与 JSON 中保持一致）
+    this.setColour(blocksColor.unit);
+    this.setOutput(true, 'UnitType');
+  }
+};
+
+const itemOptionsData = [
+	["铜", "res/items-ui/item-copper.png", "copper"],
+	["铅", "res/items-ui/item-lead.png", "lead"],
+	["煤炭", "res/items-ui/item-coal.png", "coal"],
+	["沙子", "res/items-ui/item-sand.png", "sand"],
+	["硅", "res/items-ui/item-silicon.png", "silicon"],
+	["钢化玻璃", "res/items-ui/item-metaglass.png", "metaglass"],
+	["钛", "res/items-ui/item-titanium.png", "titanium"],
+	["石墨", "res/items-ui/item-graphite.png", "graphite"],
+	["废料", "res/items-ui/item-scrap.png", "scrap"],
+	["钍", "res/items-ui/item-thorium.png", "thorium"],
+	["塑钢", "res/items-ui/item-plastanium.png", "plastanium"],
+	["孢子荚", "res/items-ui/item-spore-pod.png", "spore-pod"],
+	["硫", "res/items-ui/item-pyratite.png", "pyratite"],
+	["爆炸混合物", "res/items-ui/item-blast-compound.png", "blastCompound"],
+	["相位布", "res/items-ui/item-phase-fabric.png", "phaseFabric"],
+	["巨浪合金", "res/items-ui/item-surge-alloy.png", "surgeAlloy"]
+];
+
+Blockly.Blocks['S_Item'] = {
+  init: function() {
+    // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
+    const options = itemOptionsData.map(([text, iconSrc, value]) => [
+      createUnitOption(text, iconSrc),
+      value
+    ]);
+
+    this.appendDummyInput()
+        .appendField('塞普罗 ')
+        .appendField(new Blockly.FieldDropdown(options), 'value');
+
+    // 设置颜色和输出类型（与 JSON 中保持一致）
+    this.setColour(blocksColor.operate);
+    this.setOutput(true, 'item');
+  }
+};
+
 Blockly.defineBlocksWithJsonArray([
 	{
 		"type":"logic_compareX",
@@ -648,36 +752,36 @@ Blockly.defineBlocksWithJsonArray([
 		"colour": blocksColor.operate,
 		"output": "properties"
 	},
-	{
-		"type": "S_Item",
-		"message0": "塞普罗物品 %1",
-		"args0": [
-			{
-				"type": "field_dropdown",
-				"name": "value",
-				"options": [
-					["铜", "copper"],
-					["铅", "lead"],
-					["煤炭", "coal"],
-					["沙子", "sand"],
-					["硅", "silicon"],
-					["钢化玻璃", "metaglass"],
-					["钛", "titanium"],
-					["石墨", "graphite"],
-					["废料", "scrap"],
-					["钍", "thorium"],
-					["塑钢", "plastanium"],
-					["孢子荚", "sporePod"],
-					["硫", "pyratite"],
-					["爆炸混合物", "blastCompound"],
-					["相位布", "phase-fabric"],
-					["巨浪合金", "surge-alloy"]
-				]
-			}
-		],
-		"colour": blocksColor.operate,
-		"output": "item"
-	},
+	// {
+	// 	"type": "S_Item",
+	// 	"message0": "塞普罗物品 %1",
+	// 	"args0": [
+	// 		{
+	// 			"type": "field_dropdown",
+	// 			"name": "value",
+	// 			"options": [
+	// 				["铜", "copper"],
+	// 				["铅", "lead"],
+	// 				["煤炭", "coal"],
+	// 				["沙子", "sand"],
+	// 				["硅", "silicon"],
+	// 				["钢化玻璃", "metaglass"],
+	// 				["钛", "titanium"],
+	// 				["石墨", "graphite"],
+	// 				["废料", "scrap"],
+	// 				["钍", "thorium"],
+	// 				["塑钢", "plastanium"],
+	// 				["孢子荚", "sporePod"],
+	// 				["硫", "pyratite"],
+	// 				["爆炸混合物", "blastCompound"],
+	// 				["相位布", "phase-fabric"],
+	// 				["巨浪合金", "surge-alloy"]
+	// 			]
+	// 		}
+	// 	],
+	// 	"colour": blocksColor.operate,
+	// 	"output": "item"
+	// },
 	{
 		"type": "S_Liquid",
 		"message0": "塞普罗流体 %1",
@@ -913,58 +1017,22 @@ Blockly.defineBlocksWithJsonArray([
 		"nextStatement": null,
 		"previousStatement": null
 	},
-	{
-		"type": "S_Unit",
-		"message0": "塞普罗 %1",
-		"args0": [
-			{
-				"type": "field_dropdown",
-				"name": "value",
-				"options": [
-					["尖刀", "dagger"],
-					["战锤", "mace"],
-					["堡垒", "fortress"],
-					["权杖", "scepter"],
-					["王座", "nova"],
-					["新星", "nova"],
-					["恒星", "pulsar"],
-					["耀星", "quasar"],
-					["灾星", "vela"],
-					["死星", "corvus"],
-					["爬虫", "crawler"],
-					["毒蛛", "atrax"],
-					["血蛭", "spiroct"],
-					["毒蛊", "arkyid"],
-					["天蝎", "toxopid"],
-					["星辉", "flare"],
-					["天垠", "horizon"],
-					["苍穹", "zenith"],
-					["月影", "antumbra"],
-					["日蚀", "eclipse"],
-					["独影", "mono"],
-					["幻型", "poly"],
-					["巨像", "mega"],
-					["雷霆", "quad"],
-					["要塞", "oct"],
-					["梭鱼", "risso"],
-					["飞鲨", "minke"],
-					["戟鲸", "bryde"],
-					["蛟龙", "sei"],
-					["海神", "omura"],
-					["潜螺", "retusa"],
-					["电鳗", "oxynoe"],
-					["江豚", "cyerce"],
-					["玄武", "aegires"],
-					["龙王", "navanax"],
-					["阿尔法", "alpha"],
-					["贝塔", "beta"],
-					["伽马", "gamma"],
-				]
-			}
-		],
-		"colour": blocksColor.unit,
-		"output": "UnitType"
-	},
+	// {
+	// 	"type": "S_Unit",
+	// 	"message0": "塞普罗 %1",
+	// 	"args0": [
+	// 		{
+	// 			"type": "field_dropdown",
+	// 			"name": "value",
+	// 			"options": [
+	// 			    ["加载中...", "PLACEHOLDER"]
+	// 			]
+	// 		}
+	// 	],
+	// 	"extensions": ["unit_dropdown_extension"],
+	// 	"colour": blocksColor.unit,
+	// 	"output": "UnitType"
+	// },
 	{
 		"type": "Unitbinded",
 		"message0": "已绑定的单位",
