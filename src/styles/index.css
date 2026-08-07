@@ -378,122 +378,6 @@ body {
     opacity: 0.6;
 }
 
-/* ===== 响应式 ===== */
-@media (max-width: 900px) {
-    .main-container {
-        flex-direction: column;
-        padding: 8px 10px 10px 10px;
-        gap: 10px;
-    }
-    .blockly-wrapper {
-        flex: 3;
-        min-height: 300px;
-    }
-    .code-panel {
-		flex: 1;                     /* 垂直平均分配空间（两个面板各占 50%） */
-		min-height: 0;               /* 防止内容溢出撑大 */
-		max-width: none;             /* 宽度完全由父容器决定 */
-        max-height: 300px;
-    }
-    .header {
-        padding: 10px 16px;
-        min-height: 54px;
-    }
-    .header-title {
-        font-size: 17px;
-    }
-    .header-title span {
-        font-size: 12px;
-        margin-left: 6px;
-    }
-    .header-badge {
-        display: none;
-    }
-    .header-version {
-        font-size: 10px;
-        padding: 1px 10px;
-    }
-    #code {
-        font-size: 12px;
-        padding: 12px 14px;
-        line-height: 1.6;
-    }
-    .code-header {
-        padding: 6px 14px 6px 14px;
-        min-height: 36px;
-    }
-    .code-header-left {
-        font-size: 12px;
-    }
-    .btn-copy {
-        padding: 2px 12px;
-        font-size: 11px;
-    }
-    .header-icon {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-title {
-        font-size: 14px;
-    }
-    .header-title span {
-        display: none;
-    }
-    .header-version {
-        display: none;
-    }
-    .header {
-        padding: 8px 12px;
-        min-height: 44px;
-    }
-    .header-icon {
-        font-size: 18px;
-    }
-    .main-container {
-        padding: 4px 6px 6px 6px;
-        gap: 6px;
-    }
-    .blockly-wrapper {
-        border-radius: 8px;
-        min-height: 200px;
-    }
-    .code-panel {
-        border-radius: 8px;
-        min-height: 120px;
-        max-height: 200px;
-    }
-    #code {
-        font-size: 11px;
-        padding: 8px 10px;
-        line-height: 1.5;
-    }
-    .code-header-left .code-lang {
-        display: none;
-    }
-    .btn-copy .copy-icon {
-        font-size: 12px;
-    }
-    .btn-copy {
-        padding: 2px 10px;
-        font-size: 10px;
-    }
-
-    /* 移动端工具箱文字适配 */
-    .blocklyTreeRow {
-        padding: 4px 10px !important;
-        min-height: 28px !important;
-    }
-    .blocklyTreeLabel {
-        font-size: 12px !important;
-    }
-    .blocklyTreeIcon {
-        width: 14px !important;
-        height: 14px !important;
-    }
-}
-
 .blocklyText {
     font-weight: normal !important;
 }
@@ -501,7 +385,7 @@ body {
 .code-panels-vertical {
     display: flex;
     flex-direction: column;
-    flex: 1;                     /* 占满右侧剩余宽度 */
+    flex: 1;                     /* 占满右侧剩余宽度
     max-width: 420px;            /* 与原来单个面板最大宽度保持一致（可调） */
     min-width: 200px;
     gap: 12px;                   /* 两个面板之间的垂直间距 */
@@ -530,4 +414,144 @@ body {
     color: #3a5a7a;
     font-style: italic;
     opacity: 0.6;
+}
+
+/* ===== 移动端适配（≤ 768px） ===== */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    padding: 8px 10px 10px 10px;
+    gap: 10px;
+  }
+
+  .blockly-wrapper {
+    min-height: 300px;
+    flex: 1;
+  }
+
+  .code-panels-vertical {
+	  max-width: none;          /* 移动端取消宽度限制 */
+	  gap: 10px;
+  }
+  .code-panels-vertical .code-panel {
+	  max-height: none;         /* 取消高度限制，由 flex 分配 */
+	  min-height: 120px;        /* 保证最小可见区域 */
+  }
+
+  /* 头部紧凑化 */
+  .header {
+    padding: 8px 16px;
+    min-height: 54px;
+  }
+  .header-title {
+    font-size: 17px;
+  }
+  .header-title span {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  .header-badge,
+  .header-version {
+    display: none;
+  }
+
+  /* 工具栏按钮缩小 */
+  .toolbar button {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+  .toolbar .divider {
+    height: 14px;
+  }
+
+  /* 代码面板标题与内容 */
+  .code-header {
+    padding: 6px 12px;
+    min-height: 36px;
+  }
+  .code-header-left {
+    font-size: 12px;
+  }
+  .code-header-left .code-lang {
+    font-size: 10px;
+    padding: 0 8px;
+  }
+  .btn-copy {
+    padding: 2px 10px;
+    font-size: 11px;
+  }
+  #code,
+  #mlogCode {
+    font-size: 12px;
+    padding: 10px 12px;
+    line-height: 1.6;
+  }
+}
+
+/* ===== 超小屏（≤ 480px） ===== */
+@media (max-width: 480px) {
+  .header-icon img {
+    height: 20px;
+    width: auto;
+  }
+  .header-title {
+    font-size: 14px;
+  }
+  .header-title span {
+    display: none;
+  }
+  .header-version {
+    display: none;
+  }
+  .header {
+    padding: 6px 10px;
+    min-height: 44px;
+  }
+  .toolbar {
+    gap: 4px;
+  }
+  .toolbar button {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  .toolbar .divider {
+    margin: 0 2px;
+  }
+
+  .blockly-wrapper {
+    min-height: 200px;
+  }
+  .code-panel {
+    max-height: 150px;
+    min-height: 100px;
+  }
+  .code-header-left .code-lang {
+    display: none;
+  }
+  .btn-copy .copy-icon {
+    font-size: 12px;
+  }
+  .btn-copy {
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+  #code,
+  #mlogCode {
+    font-size: 11px;
+    padding: 8px 10px;
+    line-height: 1.5;
+  }
+
+  /* 工具箱文字适配（Blockly 原生类） */
+  .blocklyTreeRow {
+    padding: 4px 8px !important;
+    min-height: 28px !important;
+  }
+  .blocklyTreeLabel {
+    font-size: 12px !important;
+  }
+  .blocklyTreeIcon {
+    width: 14px !important;
+    height: 14px !important;
+  }
 }
