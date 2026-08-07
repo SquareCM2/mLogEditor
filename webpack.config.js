@@ -73,6 +73,7 @@ const config = {
 	new CopyWebpackPlugin({
 	    patterns: [
 	      { from: 'public/media', to: 'media' }, // 复制媒体文件到输出目录
+		  { from: 'public/res', to: 'res' },
 	      // 如果还有 favicon.ico 等，也可以复制
 	      { from: 'public/favicon.ico', to: 'favicon.ico' },
 	    ],
