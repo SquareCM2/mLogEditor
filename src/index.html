@@ -237,7 +237,7 @@
             <sep gap="14"></sep>
         </category>
 
-        <category name="数据" categorystyle="text_category">
+        <category name="输出" categorystyle="text_category">
             <block type="text"></block>
             <block type="printToFlush"></block>
 			<block type="printFlush"></block>
@@ -560,12 +560,51 @@
 			</block>
 			<sep gap="14"></sep>
         </category>
+		
+		<category name="内存" colour="255">
+		    <block type="MemSet">
+				<field name="MEMORY">mem</field>
+				<value name="BUILDING">
+				    <shadow type="variables_get">
+				        <field name="VAR">membank</field>
+				    </shadow>
+				</value>
+				<value name="SIZE">
+				    <shadow type="math_number">
+				        <field name="NUM">512</field>
+				    </shadow>
+				</value>
+			</block>
+			<block type="MemSetVal">
+				<field name="MEMORY">mem</field>
+				<value name="INDEX">
+				    <shadow type="math_number">
+				        <field name="NUM">0</field>
+				    </shadow>
+				</value>
+				<value name="VALUE">
+				    <shadow type="math_number">
+				        <field name="NUM">0</field>
+				    </shadow>
+				</value>
+			</block>
+		    <block type="MemGet">
+				<field name="MEMORY">mem</field>
+				<value name="INDEX">
+				    <shadow type="math_number">
+				        <field name="NUM">0</field>
+				    </shadow>
+				</value>
+			</block>
+			<block type="MemSize">
+				<field name="MEMORY">mem</field>
+			</block>
+		</category>
 
         <sep></sep>
 		
         <category name="变量" colour="300" custom="VARIABLE">
         </category>
-		
 		<category name="函数" colour="255" custom="PROCEDURE"></category>
     </xml>
 

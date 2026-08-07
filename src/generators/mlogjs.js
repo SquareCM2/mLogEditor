@@ -433,3 +433,30 @@ javascriptGenerator.forBlock["UnitPropBool"] = function(block, generator){
 	const value = block.getFieldValue('VALUE');
 	return [`${unit}.${value}`, Order.MEMBER];
 };
+
+//memory
+
+javascriptGenerator.forBlock["MemSet"] = function(block, generator){
+	const memory = block.getFieldValue("MEMORY") || 'mem';
+	const building = generator.valueToCode(block, 'BUILDING', Order.MEMBER) || "null";
+	const sz = generator.valueToCode(block, 'SIZE', Order.MEMBER) || "512";
+	return `const ${memory} = new Memory(${building}, ${sz});\n`;
+};
+
+javascriptGenerator.forBlock["MemSetVal"] = function(block, generator){
+	const memory = block.getFieldValue("MEMORY") || 'mem';
+	const idx = generator.valueToCode(block, 'INDEX', Order.MEMBER) || "0";
+	const value = generator.valueToCode(block, 'VALUE', Order.MEMBER) || "0";
+	return `${memory}[${idx}] = ${value};\n`;
+};
+
+javascriptGenerator.forBlock["MemGet"] = function(block, generator){
+	const memory = block.getFieldValue("MEMORY") || 'mem';
+	const idx = generator.valueToCode(block, 'INDEX', Order.MEMBER) || "0";
+	return [`${memory}[${idx}]`, Order.MEMBER];
+};
+
+javascriptGenerator.forBlock["MemSize"] = function(block, generator){
+	const memory = block.getFieldValue("MEMORY") || 'mem';
+	return [`${memory}.length`, Order.MEMBER];
+};

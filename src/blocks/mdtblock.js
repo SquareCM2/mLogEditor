@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly';
 
 const blocksColor = {
-	unit: 50, mblock: 10, ctrl: 120, operate: 270, draw: 165
+	unit: 50, mblock: 10, ctrl: 120, operate: 270, draw: 165, memory: 255
 }
 
 // ---- 辅助块（变形器工作区中使用） ----
@@ -1649,6 +1649,93 @@ Blockly.defineBlocksWithJsonArray([
 		"message0": "当前处理器",
 		"colour": blocksColor.operate,
 		"output": "Block"
+	},
+	
+	//memory io
+	{
+		"type": "MemSet",
+		"message0": "记 %1 为内存元 %2 的内存空间，大小为 %3",
+		"lastDummyAlign0": "RIGHT",
+		"args0": [
+			{
+				"type": "field_input",
+				"name": "MEMORY",
+				"check": "String"
+			},
+			{
+				"type": "input_value",
+				"name": "BUILDING",
+				"check": "variables_get"
+			},
+			{
+				"type": "input_value",
+				"name": "SIZE",
+				"check": "Number"
+			}
+		],
+		"colour": blocksColor.memory,
+		"nextStatement": null,
+		"previousStatement": null,
+		"inputsInline": true,
+	},
+	{
+		"type": "MemGet",
+		"message0": "内存空间 %1 的第 %2 项",
+		"lastDummyAlign0": "RIGHT",
+		"args0": [
+			{
+				"type": "field_input",
+				"name": "MEMORY",
+				"check": "String"
+			},
+			{
+				"type": "input_value",
+				"name": "INDEX",
+				"check": "Number"
+			}
+		],
+		"colour": blocksColor.memory,
+		"output": "Number"
+	},
+	{
+		"type": "MemSetVal",
+		"message0": "设置内存空间 %1 的第 %2 项为 %3",
+		"lastDummyAlign0": "RIGHT",
+		"args0": [
+			{
+				"type": "field_input",
+				"name": "MEMORY",
+				"check": "String"
+			},
+			{
+				"type": "input_value",
+				"name": "INDEX",
+				"check": "Number"
+			},
+			{
+				"type": "input_value",
+				"name": "VALUE",
+				"check": "Number"
+			}
+		],
+		"colour": blocksColor.memory,
+		"nextStatement": null,
+		"previousStatement": null,
+		"inputsInline": true,
+	},
+	{
+		"type": "MemSize",
+		"message0": "内存空间 %1 的大小",
+		"lastDummyAlign0": "RIGHT",
+		"args0": [
+			{
+				"type": "field_input",
+				"name": "MEMORY",
+				"check": "String"
+			},
+		],
+		"colour": blocksColor.memory,
+		"output": "Number"
 	},
 ]);
 
