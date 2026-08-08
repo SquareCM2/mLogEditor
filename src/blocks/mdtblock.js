@@ -750,7 +750,7 @@ Blockly.defineBlocksWithJsonArray([
 			}
 		],
 		"colour": blocksColor.operate,
-		"output": "properties"
+		"output": ["Number", "properties"]
 	},
 	// {
 	// 	"type": "S_Item",
