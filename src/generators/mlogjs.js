@@ -113,6 +113,12 @@ javascriptGenerator.forBlock["mblock_S"] = function(block, generator){
 	return [code, Order.MEMBER];
 };
 
+javascriptGenerator.forBlock["mblock_E"] = function(block, generator){
+	const blocktype = block.getFieldValue('value');
+	const code = 'Blocks.' + blocktype;
+	return [code, Order.MEMBER];
+};
+
 javascriptGenerator.forBlock["mblockProperties"] = function(block, generator){
 	const building = generator.valueToCode(block, 'block', Order.MEMBER) || 'null';
 	const type = block.getFieldValue('value');
@@ -154,7 +160,19 @@ javascriptGenerator.forBlock["S_Item"] = function(block, generator){
 	return [code, Order.MEMBER];
 }
 
+javascriptGenerator.forBlock["E_Item"] = function(block, generator){
+	const blocktype = block.getFieldValue('value');
+	const code = 'Items.' + blocktype;
+	return [code, Order.MEMBER];
+}
+
 javascriptGenerator.forBlock["S_Liquid"] = function(block, generator){
+	const blocktype = block.getFieldValue('value');
+	const code = 'Liquids.' + blocktype;
+	return [code, Order.MEMBER];
+}
+
+javascriptGenerator.forBlock["E_Liquid"] = function(block, generator){
 	const blocktype = block.getFieldValue('value');
 	const code = 'Liquids.' + blocktype;
 	return [code, Order.MEMBER];
@@ -186,6 +204,12 @@ javascriptGenerator.forBlock["Ubind"] = function(block, generator){
 };
 
 javascriptGenerator.forBlock["S_Unit"] = function(block, generator){
+	const type = block.getFieldValue('value');
+	const code = 'Units.' + type;
+	return [code, Order.MEMBER];
+};
+
+javascriptGenerator.forBlock["E_Unit"] = function(block, generator){
 	const type = block.getFieldValue('value');
 	const code = 'Units.' + type;
 	return [code, Order.MEMBER];

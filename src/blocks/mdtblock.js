@@ -162,6 +162,27 @@ const unitOptionsData = [
   ["伽马", "res/units-ui/gamma.png", "gamma"]
 ];
 
+const unitOptionsData_E = [
+	["围护", "res/units-ui/stell.png", "stell"],
+	["循迹", "res/units-ui/locus.png", "locus"],
+	["准绳", "res/units-ui/precept.png", "precept"],
+	["征服", "res/units-ui/vanquish.png", "vanquish"],
+	["领主", "res/units-ui/conquer.png", "conquer"],
+	["挣脱", "res/units-ui/elude.png", "elude"],
+	["遮蔽", "res/units-ui/avert.png", "avert"],
+	["消散", "res/units-ui/obviate.png", "obviate"],
+	["遏止", "res/units-ui/quell.png", "quell"],
+	["悲怆", "res/units-ui/disrupt.png", "disrupt"],
+	["天守", "res/units-ui/merui.png", "merui"],
+	["天赐", "res/units-ui/cleroi.png", "cleroi"],
+	["天灾", "res/units-ui/anthicus.png", "anthicus"],
+	["天理", "res/units-ui/tecta.png", "tecta"],
+	["天帝", "res/units-ui/collaris.png", "collaris"],
+	["苏醒", "res/units-ui/evoke.png", "evoke"],
+	["策动", "res/units-ui/incite.png", "incite"],
+	["发散", "res/units-ui/emanate.png", "emanate"]
+]
+
 Blockly.Blocks['S_Unit'] = {
   init: function() {
     // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
@@ -172,6 +193,24 @@ Blockly.Blocks['S_Unit'] = {
 
     this.appendDummyInput()
         .appendField('塞普罗 ')
+        .appendField(new Blockly.FieldDropdown(options), 'value');
+
+    // 设置颜色和输出类型（与 JSON 中保持一致）
+    this.setColour(blocksColor.unit);
+    this.setOutput(true, 'UnitType');
+  }
+};
+
+Blockly.Blocks['E_Unit'] = {
+  init: function() {
+    // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
+    const options = unitOptionsData_E.map(([text, iconSrc, value]) => [
+      createUnitOption(text, iconSrc),
+      value
+    ]);
+
+    this.appendDummyInput()
+        .appendField('埃里克尔 ')
         .appendField(new Blockly.FieldDropdown(options), 'value');
 
     // 设置颜色和输出类型（与 JSON 中保持一致）
@@ -199,6 +238,21 @@ const itemOptionsData = [
 	["巨浪合金", "res/items-ui/item-surge-alloy.png", "surgeAlloy"]
 ];
 
+const itemOptionsData_E = [
+	["铍", "res/items-ui/item-beryllium.png", "beryllium"],
+	["钨", "res/items-ui/item-tungsten.png", "tungsten"],
+	["氧化物", "res/items-ui/item-oxide.png", "oxide"],
+	["碳化物", "res/items-ui/item-carbide.png", "carbide"],
+	["石墨", "res/items-ui/item-graphite.png", "graphite"],
+	["沙子", "res/items-ui/item-sand.png", "sand"],
+	["钍", "res/items-ui/item-thorium.png", "thorium"],
+	["硅", "res/items-ui/item-silicon.png", "silicon"],
+	["相位布", "res/items-ui/item-phase-fabric.png", "phaseFabric"],
+	["巨浪合金", "res/items-ui/item-surge-alloy.png", "surgeAlloy"],
+	["裂变产物", "res/items-ui/item-fissile-matter.png", "fissileMatter"],
+	["休眠囊肿", "res/items-ui/item-dormant-cyst.png", "dormantCyst"],
+];
+
 Blockly.Blocks['S_Item'] = {
   init: function() {
     // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
@@ -209,6 +263,24 @@ Blockly.Blocks['S_Item'] = {
 
     this.appendDummyInput()
         .appendField('塞普罗 ')
+        .appendField(new Blockly.FieldDropdown(options), 'value');
+
+    // 设置颜色和输出类型（与 JSON 中保持一致）
+    this.setColour(blocksColor.operate);
+    this.setOutput(true, 'item');
+  }
+};
+
+Blockly.Blocks['E_Item'] = {
+  init: function() {
+    // 将选项数据转换为 Blockly.FieldDropdown 所需的格式
+    const options = itemOptionsData_E.map(([text, iconSrc, value]) => [
+      createUnitOption(text, iconSrc),
+      value
+    ]);
+
+    this.appendDummyInput()
+        .appendField('埃里克尔 ')
         .appendField(new Blockly.FieldDropdown(options), 'value');
 
     // 设置颜色和输出类型（与 JSON 中保持一致）
@@ -589,7 +661,10 @@ Blockly.defineBlocksWithJsonArray([
 		                ["融毁", "meltdown"],
 		                ["厄兆", "foreshadow"],
 		                ["容器", "container"],
-		                ["发射台", "launchPad"],
+		                ["发射台（旧）", "launchPad"],
+						["发射台", "advancedLaunchPad"],
+						["接收台", "landingPad"],
+						["行星际加速器", "interplanetaryAccelerator"],
 		                ["裂解", "segment"],
 		                ["陆军工厂", "groundFactory"],
 		                ["空军工厂", "airFactory"],
@@ -610,6 +685,118 @@ Blockly.defineBlocksWithJsonArray([
 		                ["内存元", "memoryCell"],
 		                ["内存库", "memoryBank"],
 		                ["世界内存元", "worldCell"]
+		            ]
+		        }
+		    ],
+		"colour":blocksColor.mblock,
+		"output": "BlockType" 
+	},
+	{
+		"type": "mblock_E",
+		"message0": "埃里克尔 %1",
+		    "args0": [
+		        {
+		            "type": "field_dropdown",
+		            "name": "value",
+		            "options": [
+		                ["电弧硅炉", "siliconArcFurnace"],
+		                ["电解机", "electrolyzer"],
+		                ["大气收集器", "atmosphericConcentrator"],
+		                ["氧化室", "oxidationChamber"],
+		                ["电制热机", "electricHeater"],
+		                ["矿渣制热机", "slagHeater"],
+		                ["相织制热机", "phaseHeater"],
+		                ["热量传输机", "heatRedirector"],
+		                ["小型热量传输机", "smallHeatRedirector"],
+		                ["热量路由器", "heatRouter"],
+		                ["矿渣焚化炉", "slagIncinerator"],
+		                ["碳化物坩埚", "carbideCrucible"],
+		                ["矿渣离心机", "slagCentrifuge"],
+		                ["合金坩埚", "surgeCrucible"],
+		                ["氰合成机", "cyanogenSynthesizer"],
+		                ["相织布合成机", "phaseSynthesizer"],
+		                ["热量反应堆", "heatReactor"],
+		                ["铍墙", "berylliumWall"],
+		                ["大型铍墙", "berylliumWallLarge"],
+		                ["钨墙", "tungstenWall"],
+		                ["大型钨墙", "tungstenWallLarge"],
+		                ["防爆闸门", "blastDoor"],
+		                ["碳化物墙", "carbideWall"],
+		                ["大型碳化物墙", "carbideWallLarge"],
+		                ["强化合金墙", "reinforcedSurgeWall"],
+		                ["大型强化合金墙", "reinforcedSurgeWallLarge"],
+		                ["盾墙", "shieldedWall"],
+		                ["雷达", "radar"],
+		                ["建造塔", "buildTower"],
+		                ["再生投影器", "regenProjector"],
+		                ["震爆塔", "shockwaveTower"],
+		                ["护盾投影器", "shieldProjector"],
+		                ["大型护盾投影器", "largeShieldProjector"],
+		                ["装甲管道", "armoredDuct"],
+		                ["溢流管道", "overflowDuct"],
+		                ["反向溢流管", "underflowDuct"],
+		                ["管道装卸器", "ductUnloader"],
+		                ["合金传送带", "surgeConveyor"],
+		                ["合金路由器", "surgeRouter"],
+		                ["单位物流装载器", "unitCargoLoader"],
+		                ["单位物流卸载点", "unitCargoUnloadPoint"],
+		                ["强化泵", "reinforcedPump"],
+		                ["强化导管", "reinforcedConduit"],
+		                ["强化流体交叉器", "reinforcedLiquidJunction"],
+		                ["强化流体带桥", "reinforcedBridgeConduit"],
+		                ["强化流体路由器", "reinforcedLiquidRouter"],
+		                ["强化流体容器", "reinforcedLiquidContainer"],
+		                ["强化流体储罐", "reinforcedLiquidTank"],
+		                ["激光节点", "beamNode"],
+		                ["激光塔", "beamTower"],
+		                ["激光连接器", "beamLink"],
+		                ["涡轮冷凝器", "turbineCondenser"],
+		                ["化学燃烧室", "chemicalCombustionChamber"],
+		                ["热解发生器", "pyrolysisGenerator"],
+		                ["排气冷凝器", "ventCondenser"],
+		                ["墙壁粉碎机", "cliffCrusher"],
+		                ["高级墙壁粉碎机", "largeCliffCrusher"],
+		                ["等离子钻机", "plasmaBore"],
+		                ["高级等离子钻机", "largePlasmaBore"],
+		                ["冲击钻头", "impactDrill"],
+		                ["爆裂钻头", "eruptionDrill"],
+		                ["城堡核心", "coreBastion"],
+		                ["堡垒核心", "coreCitadel"],
+		                ["卫城核心", "coreAcropolis"],
+		                ["强化容器", "reinforcedContainer"],
+		                ["强化仓库", "reinforcedVault"],
+		                ["撕裂", "breach"],
+		                ["升华", "sublimate"],
+		                ["泰坦", "titan"],
+		                ["驱离", "disperse"],
+		                ["劫难", "afflict"],
+		                ["光辉", "lustre"],
+		                ["创伤", "scathe"],
+		                ["坦克重构厂", "tankRefabricator"],
+		                ["机甲重构厂", "mechRefabricator"],
+		                ["飞船重构厂", "shipRefabricator"],
+		                ["坦克组装厂", "tankAssembler"],
+		                ["飞船组装厂", "shipAssembler"],
+		                ["机甲组装厂", "mechAssembler"],
+		                ["强化载荷传送带", "reinforcedPayloadConveyor"],
+		                ["强化载荷路由器", "reinforcedPayloadRouter"],
+		                ["载荷质量驱动器", "payloadMassDriver"],
+		                ["解构器", "smallDeconstructor"],
+		                ["画板", "canvas"],
+		                ["大型画板", "largeCanvas"],
+		                ["世界处理器", "worldProcessor"],
+		                ["世界内存元", "worldCell"],
+		                ["坦克制造厂", "tankFabricator"],
+		                ["机甲制造厂", "mechFabricator"],
+		                ["飞船制造厂", "shipFabricator"],
+		                ["高级再重构工厂", "primeRefabricator"],
+		                ["单位维修塔", "unitRepairTower"],
+		                ["扩散", "diffuse"],
+		                ["基本装配厂模块", "basicAssemblerModule"],
+		                ["天谴", "smite"],
+		                ["魔灵", "malign"],
+		                ["通量反应堆", "fluxReactor"],
+		                ["瘤变反应堆", "neoplasiaReactor"]
 		            ]
 		        }
 		    ],
@@ -794,6 +981,28 @@ Blockly.defineBlocksWithJsonArray([
 					["矿渣液", "slag"],
 					["石油", "oil"],
 					["冷冻液", "cryofluid"]
+				]
+			}
+		],
+		"colour": blocksColor.operate,
+		"output": "item"
+	},
+	{
+		"type": "E_Liquid",
+		"message0": "埃里克尔流体 %1",
+		"args0": [
+			{
+				"type": "field_dropdown",
+				"name": "value",
+				"options": [
+					["水", "water"],
+					["矿渣液", "slag"],
+					["瘤液", "neoplasm"],
+					["芳油", "arkycite"],
+					["臭氧", "ozone"],
+					["氢气", "hydrogen"],
+					["氮气", "nitrogen"],
+					["氰气", "cyanogen"]
 				]
 			}
 		],
